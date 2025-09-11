@@ -1,0 +1,19 @@
+# Copy this file to terraform.tfvars and update with your values
+
+# Your Google Cloud project ID
+project_id = "your-gcp-project-id"
+
+# Google Cloud region where resources will be created
+region = "us-central1"
+
+# Google Cloud zone
+zone = "us-central1-a"
+
+# Environment name (dev, staging, prod)
+environment = "dev"
+
+# Name of the Pub/Sub topic for image processing events
+pubsub_topic_name = "image-processing-events"
+
+# Whether to enable required Google Cloud APIs
+enable_apis = true
