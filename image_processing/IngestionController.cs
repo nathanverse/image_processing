@@ -1,4 +1,6 @@
 using Confluent.Kafka;
+using Google.Cloud.PubSub.V1;
+using Google.Protobuf;
 
 namespace image_processing;
 
@@ -13,11 +15,10 @@ using System.Threading.Tasks;
 [Route("api/[controller]")]
 public class IngestionController : ControllerBase
 {
-    private readonly IProducer<string, string> _kafkaProducer;
-
-    public IngestionController(IProducer<string, string> kafkaProducer)
+    private readonly PublisherClient _publisherClient;
+    public IngestionController(PublisherClient publisherClient)
     {
-        _kafkaProducer = kafkaProducer;
+        _publisherClient = publisherClient;
     }
 
     [HttpPost("upload-image")]
@@ -39,13 +40,13 @@ public class IngestionController : ControllerBase
         };
 
         // 4. Send the message to Kafka
-        var message = new Message<string, string>
+        var message = new PubsubMessage
         {
-            Key = Guid.NewGuid().ToString(), // Use a unique key
-            Value = JsonSerializer.Serialize(messagePayload)
+            Data = ByteString.CopyFromUtf8(JsonSerializer.Serialize(messagePayload))
         };
 
-        await _kafkaProducer.ProduceAsync("image-processing-topic", message);
+
+        await _publisherClient.PublishAsync(message);
 
         // 5. Return a success response
         return Ok(new { Message = "Image ingested successfully and processing task sent to Kafka.", ImageUrl = imageUrl });
