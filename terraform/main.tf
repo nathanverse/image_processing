@@ -22,17 +22,15 @@ resource "google_project_service" "pubsub_api" {
   disable_dependent_services = true
 }
 
-resource "google_project_service" "storage_api" {
-  service = "storage-component.googleapis.com"
-  
-  disable_dependent_services = true
-}
+# resource "google_project_service" "storage_api" {
+#   service = "storage-component.googleapis.com"
+#   
+#   disable_dependent_services = true
+# }
 
 # Create Pub/Sub topic for image processing events
 resource "google_pubsub_topic" "image_processing_topic" {
   name = var.pubsub_topic_name
-  
-  message_retention_duration = "86400s"  # 24 hours
   
   labels = {
     environment = var.environment
@@ -63,6 +61,8 @@ resource "google_pubsub_subscription" "image_processing_subscription" {
     environment = var.environment
     purpose     = "image-processing"
   }
+  
+  depends_on = [google_pubsub_topic.image_processing_topic]
 }
 
 # Create dead letter topic for failed messages
@@ -71,7 +71,7 @@ resource "google_pubsub_topic" "image_processing_dead_letter" {
   
   labels = {
     environment = var.environment
-    purpose     = "image-processing-dead-letter"
+    purpose     = "dead-letter"
   }
   
   depends_on = [google_project_service.pubsub_api]
@@ -86,14 +86,14 @@ resource "google_service_account" "image_processing_sa" {
 
 # Grant Pub/Sub publisher role to service account
 resource "google_pubsub_topic_iam_member" "publisher" {
-  topic  = google_pubsub_topic.image_processing_topic.name
+  topic  = google_pubsub_topic.image_processing_topic.id
   role   = "roles/pubsub.publisher"
   member = "serviceAccount:${google_service_account.image_processing_sa.email}"
 }
 
 # Grant Pub/Sub subscriber role to service account
 resource "google_pubsub_subscription_iam_member" "subscriber" {
-  subscription = google_pubsub_subscription.image_processing_subscription.name
+  subscription = google_pubsub_subscription.image_processing_subscription.id
   role         = "roles/pubsub.subscriber"
   member       = "serviceAccount:${google_service_account.image_processing_sa.email}"
 }
@@ -105,36 +105,36 @@ resource "google_service_account_key" "image_processing_key" {
 }
 
 # Storage bucket for processed images (optional)
-resource "google_storage_bucket" "processed_images" {
-  name     = "${var.project_id}-processed-images"
-  location = var.region
-  
-  uniform_bucket_level_access = true
-  
-  versioning {
-    enabled = true
-  }
-  
-  lifecycle_rule {
-    condition {
-      age = 30
-    }
-    action {
-      type = "Delete"
-    }
-  }
-  
-  labels = {
-    environment = var.environment
-    purpose     = "processed-images"
-  }
-  
-  depends_on = [google_project_service.storage_api]
-}
+# resource "google_storage_bucket" "processed_images" {
+#   name     = "${var.project_id}-processed-images"
+#   location = var.region
+#   
+#   uniform_bucket_level_access = true
+#   
+#   versioning {
+#     enabled = true
+#   }
+#   
+#   lifecycle_rule {
+#     condition {
+#       age = 30
+#     }
+#     action {
+#       type = "Delete"
+#     }
+#   }
+#   
+#   labels = {
+#     environment = var.environment
+#     purpose     = "processed-images"
+#   }
+#   
+#   depends_on = [google_project_service.storage_api]
+# }
 
 # Grant storage object admin role to service account
-resource "google_storage_bucket_iam_member" "storage_admin" {
-  bucket = google_storage_bucket.processed_images.name
-  role   = "roles/storage.objectAdmin"
-  member = "serviceAccount:${google_service_account.image_processing_sa.email}"
-}
+# resource "google_storage_bucket_iam_member" "storage_admin" {
+#   bucket = google_storage_bucket.processed_images.name
+#   role   = "roles/storage.objectAdmin"
+#   member = "serviceAccount:${google_service_account.image_processing_sa.email}"
+# }

@@ -24,15 +24,15 @@ output "service_account_key" {
   sensitive   = true
 }
 
-output "storage_bucket_name" {
-  description = "Name of the storage bucket for processed images"
-  value       = google_storage_bucket.processed_images.name
-}
+# output "storage_bucket_name" {
+#   description = "Name of the storage bucket for processed images"
+#   value       = google_storage_bucket.processed_images.name
+# }
 
-output "storage_bucket_url" {
-  description = "URL of the storage bucket"
-  value       = google_storage_bucket.processed_images.url
-}
+# output "storage_bucket_url" {
+#   description = "URL of the storage bucket"
+#   value       = google_storage_bucket.processed_images.url
+# }
 
 output "project_id" {
   description = "The Google Cloud project ID"
