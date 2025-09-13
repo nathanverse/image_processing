@@ -31,7 +31,7 @@ public class IngestionController : ControllerBase
 
         var imageUrl = "https://ahayne.com/wp-content/uploads/2024/10/anime-girl-14pcSwFB.jpg";
 
-        // 3. Create a message payload for Kafka
+        // 3. Create a message payload for Pub/Sub
         var messagePayload = new
         {
             Url = imageUrl,
@@ -39,16 +39,15 @@ public class IngestionController : ControllerBase
             OriginalFileName = imageFile.FileName,
         };
 
-        // 4. Send the message to Kafka
+        // 4. Send the message to Pub/Sub
         var message = new PubsubMessage
         {
             Data = ByteString.CopyFromUtf8(JsonSerializer.Serialize(messagePayload))
         };
-
-
+        
         await _publisherClient.PublishAsync(message);
 
         // 5. Return a success response
-        return Ok(new { Message = "Image ingested successfully and processing task sent to Kafka.", ImageUrl = imageUrl });
+        return Ok(new { Message = "Image ingested successfully and processing task sent to Pub/Sub.", ImageUrl = imageUrl });
     }
 }

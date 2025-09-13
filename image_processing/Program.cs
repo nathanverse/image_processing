@@ -8,8 +8,13 @@ using Google.Api.Gax;
 using Google.Cloud.PubSub.V1;
 
 var builder = WebApplication.CreateBuilder(args);
-var topicId = "your-topic-id"; // Replace with your Pub/Sub topic ID
-var projectId = "your-gcp-project-id"; // Replace with your Google Cloud project ID
+
+// Add configuration
+builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+// Get configuration values
+var projectId = builder.Configuration["PubSub:ProjectId"] ?? "bustling-icon-430107-b3"; // Replace with your actual project ID
+var topicId = builder.Configuration["PubSub:TopicName"] ?? "image-processing-events"; // This should match your Terraform topic name
 var topicName = TopicName.FromProjectTopic(projectId, topicId);
 
 // Add services to the container.
@@ -18,7 +23,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
 
 builder.Services.AddSingleton<PublisherClient>(provider =>
