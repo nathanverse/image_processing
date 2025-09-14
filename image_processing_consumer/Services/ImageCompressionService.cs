@@ -6,18 +6,18 @@ using Microsoft.Extensions.Logging;
 
 namespace ImageProcessingConsumer.Services;
 
-public interface IImageCompressionService
+public interface IImageOCRService
 {
-    Task<string> CompressImageAsync(ImageProcessingMessage message);
+    Task<string> DoOCRAsync(ImageProcessingMessage message);
 }
 
-public class ImageCompressionService : IImageCompressionService
+public class ImageOcrService : IImageOCRService
 {
     private readonly HttpClient _httpClient;
-    private readonly ILogger<ImageCompressionService> _logger;
+    private readonly ILogger<ImageOcrService> _logger;
     private readonly string _outputDirectory;
 
-    public ImageCompressionService(HttpClient httpClient, ILogger<ImageCompressionService> logger)
+    public ImageOcrService(HttpClient httpClient, ILogger<ImageOcrService> logger)
     {
         _httpClient = httpClient;
         _logger = logger;
@@ -27,7 +27,7 @@ public class ImageCompressionService : IImageCompressionService
         Directory.CreateDirectory(_outputDirectory);
     }
 
-    public async Task<string> CompressImageAsync(ImageProcessingMessage message)
+    public async Task<string> DoOCRAsync(ImageProcessingMessage message)
     {
         try
         {

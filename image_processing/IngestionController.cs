@@ -35,14 +35,19 @@ public class IngestionController : ControllerBase
         var messagePayload = new
         {
             Url = imageUrl,
-            TaskType = "compressing",
+            TaskType = "ocr",
             OriginalFileName = imageFile.FileName,
+        };
+        
+        var options = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
         };
 
         // 4. Send the message to Pub/Sub
         var message = new PubsubMessage
         {
-            Data = ByteString.CopyFromUtf8(JsonSerializer.Serialize(messagePayload))
+            Data = ByteString.CopyFromUtf8(JsonSerializer.Serialize(messagePayload, options))
         };
         
         await _publisherClient.PublishAsync(message);

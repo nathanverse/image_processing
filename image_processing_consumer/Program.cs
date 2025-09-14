@@ -20,10 +20,10 @@ builder.Services.AddLogging(logging =>
 });
 
 // Add HttpClient for downloading images
-builder.Services.AddHttpClient<IImageCompressionService, ImageCompressionService>();
+builder.Services.AddHttpClient<IImageOCRService, ImageOcrService>();
 
 // Add services
-builder.Services.AddSingleton<IImageCompressionService, ImageCompressionService>();
+builder.Services.AddSingleton<IImageOCRService, ImageOcrService>();
 
 // Configure Pub/Sub Subscriber
 builder.Services.AddSingleton<SubscriberClient>(provider =>
@@ -35,21 +35,8 @@ builder.Services.AddSingleton<SubscriberClient>(provider =>
         ?? throw new InvalidOperationException("PubSub:SubscriptionName configuration is required");
 
     var subscriptionPath = SubscriptionName.FromProjectSubscription(projectId, subscriptionName);
-    
-    var clientBuilder = new SubscriberClientBuilder
-    {
-        SubscriptionName = subscriptionPath,
-        Settings = new SubscriberSettings
-        {
-            AckExtensionWindow = TimeSpan.FromMinutes(5),
-            FlowControlSettings = new Google.Api.Gax.FlowControlSettings(
-                maxOutstandingElementCount: 100,
-                maxOutstandingByteCount: null
-            )
-        }
-    };
 
-    return clientBuilder.Build();
+    return SubscriberClient.Create(subscriptionPath);
 });
 
 // Add the background service

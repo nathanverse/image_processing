@@ -11,18 +11,18 @@ namespace ImageProcessingConsumer.Services;
 public class PubSubConsumerService : BackgroundService
 {
     private readonly ILogger<PubSubConsumerService> _logger;
-    private readonly IImageCompressionService _compressionService;
+    private readonly IImageOCRService _ocrService;
     private readonly SubscriberClient _subscriberClient;
     private readonly string _subscriptionName;
 
     public PubSubConsumerService(
         ILogger<PubSubConsumerService> logger,
-        IImageCompressionService compressionService,
+        IImageOCRService ocrService,
         SubscriberClient subscriberClient,
         IConfiguration configuration)
     {
         _logger = logger;
-        _compressionService = compressionService;
+        _ocrService = ocrService;
         _subscriberClient = subscriberClient;
         _subscriptionName = configuration["PubSub:SubscriptionName"] 
             ?? throw new InvalidOperationException("PubSub:SubscriptionName configuration is required");
@@ -68,7 +68,7 @@ public class PubSubConsumerService : BackgroundService
             var messageText = message.Data.ToStringUtf8();
             var imageProcessingMessage = JsonSerializer.Deserialize<ImageProcessingMessage>(messageText, new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
             });
 
             if (imageProcessingMessage == null)
@@ -81,9 +81,9 @@ public class PubSubConsumerService : BackgroundService
                 imageProcessingMessage.TaskType, imageProcessingMessage.OriginalFileName);
 
             // Process the image based on task type
-            if (imageProcessingMessage.TaskType.Equals("compressing", StringComparison.OrdinalIgnoreCase))
+            if (imageProcessingMessage.TaskType.Equals("ocr", StringComparison.OrdinalIgnoreCase))
             {
-                var outputPath = await _compressionService.CompressImageAsync(imageProcessingMessage);
+                var outputPath = await _ocrService.DoOCRAsync(imageProcessingMessage);
                 _logger.LogInformation("Image compressed successfully and saved to: {OutputPath}", outputPath);
             }
             else
