@@ -22,11 +22,11 @@ resource "google_project_service" "pubsub_api" {
   disable_dependent_services = true
 }
 
-# resource "google_project_service" "storage_api" {
-#   service = "storage-component.googleapis.com"
-#   
-#   disable_dependent_services = true
-# }
+resource "google_project_service" "storage_api" {
+  service = "storage-component.googleapis.com"
+  
+  disable_dependent_services = true
+}
 
 # Create Pub/Sub topic for image processing events
 resource "google_pubsub_topic" "image_processing_topic" {
@@ -105,36 +105,30 @@ resource "google_service_account_key" "image_processing_key" {
 }
 
 # Storage bucket for processed images (optional)
-# resource "google_storage_bucket" "processed_images" {
-#   name     = "${var.project_id}-processed-images"
-#   location = var.region
-#   
-#   uniform_bucket_level_access = true
-#   
-#   versioning {
-#     enabled = true
-#   }
-#   
-#   lifecycle_rule {
-#     condition {
-#       age = 30
-#     }
-#     action {
-#       type = "Delete"
-#     }
-#   }
-#   
-#   labels = {
-#     environment = var.environment
-#     purpose     = "processed-images"
-#   }
-#   
-#   depends_on = [google_project_service.storage_api]
-# }
-
-# Grant storage object admin role to service account
-# resource "google_storage_bucket_iam_member" "storage_admin" {
-#   bucket = google_storage_bucket.processed_images.name
-#   role   = "roles/storage.objectAdmin"
-#   member = "serviceAccount:${google_service_account.image_processing_sa.email}"
-# }
+resource "google_storage_bucket" "processed_images" {
+  name     = "${var.project_id}-processed-images"
+  location = var.region
+  storage_class = "STANDARD"
+  
+  uniform_bucket_level_access = true
+  
+  versioning {
+    enabled = true
+  }
+  
+  lifecycle_rule {
+    condition {
+      age = 30
+    }
+    action {
+      type = "Delete"
+    }
+  }
+  
+  labels = {
+    environment = var.environment
+    purpose     = "processed-images"
+  }
+  
+  depends_on = [google_project_service.storage_api]
+}

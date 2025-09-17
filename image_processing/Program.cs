@@ -6,6 +6,7 @@ using System.Text.Json;
 using Confluent.Kafka;
 using Google.Api.Gax;
 using Google.Cloud.PubSub.V1;
+using image_processing.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,9 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
+
+// Register Storage Service
+builder.Services.AddSingleton<IStorageService, StorageService>();
 
 builder.Services.AddSingleton<PublisherClient>(provider =>
 {
