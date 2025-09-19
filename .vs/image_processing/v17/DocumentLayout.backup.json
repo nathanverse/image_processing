@@ -1,0 +1,247 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\.Net\\imageprocessing\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\ingestioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\ingestioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\migrations\\20250919113125_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\migrations\\20250919113125_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\services\\storageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\services\\storageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2A5C8D7-4F3E-4A9B-8C6D-1E2F3A4B5C6D}|image_processing_consumer\\image_processing_consumer.csproj|d:\\.net\\imageprocessing\\image_processing_consumer\\image_processing_consumer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B2A5C8D7-4F3E-4A9B-8C6D-1E2F3A4B5C6D}|image_processing_consumer\\image_processing_consumer.csproj|solutionrelative:image_processing_consumer\\image_processing_consumer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\image_processing.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\image_processing.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|d:\\.net\\imageprocessing\\image_processing\\image_processing.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8E34924E-D361-46AD-B3AD-BC0E860830E9}|image_processing\\image_processing.csproj|solutionrelative:image_processing\\image_processing.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2A5C8D7-4F3E-4A9B-8C6D-1E2F3A4B5C6D}|image_processing_consumer\\image_processing_consumer.csproj|d:\\.net\\imageprocessing\\image_processing_consumer\\models\\imageprocessingmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2A5C8D7-4F3E-4A9B-8C6D-1E2F3A4B5C6D}|image_processing_consumer\\image_processing_consumer.csproj|solutionrelative:image_processing_consumer\\models\\imageprocessingmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2A5C8D7-4F3E-4A9B-8C6D-1E2F3A4B5C6D}|image_processing_consumer\\image_processing_consumer.csproj|d:\\.net\\imageprocessing\\image_processing_consumer\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2A5C8D7-4F3E-4A9B-8C6D-1E2F3A4B5C6D}|image_processing_consumer\\image_processing_consumer.csproj|solutionrelative:image_processing_consumer\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20250919113125_InitialCreate.cs",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\Migrations\\20250919113125_InitialCreate.cs",
+              "RelativeDocumentMoniker": "image_processing\\Migrations\\20250919113125_InitialCreate.cs",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\Migrations\\20250919113125_InitialCreate.cs",
+              "RelativeToolTip": "image_processing\\Migrations\\20250919113125_InitialCreate.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T11:31:28.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Task.cs",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\Models\\Task.cs",
+              "RelativeDocumentMoniker": "image_processing\\Models\\Task.cs",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\Models\\Task.cs",
+              "RelativeToolTip": "image_processing\\Models\\Task.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T10:45:10.726Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\appsettings.json",
+              "RelativeDocumentMoniker": "image_processing\\appsettings.json",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\appsettings.json",
+              "RelativeToolTip": "image_processing\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-19T10:40:13.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "image_processing.csproj",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\image_processing.csproj",
+              "RelativeDocumentMoniker": "image_processing\\image_processing.csproj",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\image_processing.csproj",
+              "RelativeToolTip": "image_processing\\image_processing.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-19T10:44:46.464Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StorageService.cs",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\Services\\StorageService.cs",
+              "RelativeDocumentMoniker": "image_processing\\Services\\StorageService.cs",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\Services\\StorageService.cs",
+              "RelativeToolTip": "image_processing\\Services\\StorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T10:26:17.122Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "image_processing\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\Properties\\launchSettings.json",
+              "RelativeToolTip": "image_processing\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-19T10:24:14.973Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IngestionController.cs",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\IngestionController.cs",
+              "RelativeDocumentMoniker": "image_processing\\IngestionController.cs",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\IngestionController.cs",
+              "RelativeToolTip": "image_processing\\IngestionController.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAgwEUAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T10:20:11.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "image_processing\\Data\\AppDbContext.cs",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "image_processing\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAgwAwAAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T10:45:34.825Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TaskController.cs",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\Controllers\\TaskController.cs",
+              "RelativeDocumentMoniker": "image_processing\\Controllers\\TaskController.cs",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\Controllers\\TaskController.cs",
+              "RelativeToolTip": "image_processing\\Controllers\\TaskController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwBwAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T11:18:56.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "image_processing",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\image_processing.csproj",
+              "RelativeDocumentMoniker": "image_processing\\image_processing.csproj",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\image_processing.csproj",
+              "RelativeToolTip": "image_processing\\image_processing.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-19T10:52:41.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "image_processing_consumer.csproj",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing_consumer\\image_processing_consumer.csproj",
+              "RelativeDocumentMoniker": "image_processing_consumer\\image_processing_consumer.csproj",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing_consumer\\image_processing_consumer.csproj",
+              "RelativeToolTip": "image_processing_consumer\\image_processing_consumer.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-19T10:55:32.297Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing\\Program.cs",
+              "RelativeDocumentMoniker": "image_processing\\Program.cs",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing\\Program.cs",
+              "RelativeToolTip": "image_processing\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T10:18:38.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing_consumer\\Program.cs",
+              "RelativeDocumentMoniker": "image_processing_consumer\\Program.cs",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing_consumer\\Program.cs",
+              "RelativeToolTip": "image_processing_consumer\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T10:26:08.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ImageProcessingMessage.cs",
+              "DocumentMoniker": "D:\\.Net\\imageprocessing\\image_processing_consumer\\Models\\ImageProcessingMessage.cs",
+              "RelativeDocumentMoniker": "image_processing_consumer\\Models\\ImageProcessingMessage.cs",
+              "ToolTip": "D:\\.Net\\imageprocessing\\image_processing_consumer\\Models\\ImageProcessingMessage.cs",
+              "RelativeToolTip": "image_processing_consumer\\Models\\ImageProcessingMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T10:24:41.609Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
