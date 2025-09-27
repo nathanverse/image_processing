@@ -1,6 +1,7 @@
-using Google;
+﻿using Google;
 using Google.Cloud.Storage.V1;
-using Google.Apis;
+using Google.Api.Gax;
+using Microsoft.AspNetCore.Http;
 
 namespace image_processing.Services
 {
@@ -8,6 +9,7 @@ namespace image_processing.Services
     {
         Task<string> UploadImageAsync(IFormFile imageFile, string? fileName = null);
         Task<Stream> DownloadImageAsync(string fileName);
+        Task<bool> ObjectExistsAsync(string objectName);
     }
 
     public class StorageService : IStorageService
@@ -21,49 +23,49 @@ namespace image_processing.Services
             _bucketName = configuration["Storage:BucketName"] ?? throw new ArgumentException("Storage:BucketName not configured");
         }
 
+        public async Task<bool> ObjectExistsAsync(string objectName)
+        {
+            try
+            {
+                await _storageClient.GetObjectAsync(_bucketName, objectName);
+                return true;
+            }
+            catch (GoogleApiException ex) when (ex.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return false;
+            }
+        }
+
         public async Task<string> UploadImageAsync(IFormFile imageFile, string? fileName = null)
         {
             if (imageFile == null || imageFile.Length == 0)
                 throw new ArgumentException("Invalid image file");
 
-            // Generate unique filename if not provided
             if (string.IsNullOrEmpty(fileName))
             {
                 var extension = Path.GetExtension(imageFile.FileName);
                 fileName = $"images/{Guid.NewGuid()}{extension}";
             }
 
-            // Upload to Google Cloud Storage
             using var stream = imageFile.OpenReadStream();
             await _storageClient.UploadObjectAsync(
-                bucket: _bucketName,
-                objectName: fileName,
-                contentType: imageFile.ContentType,
-                source: stream
+                _bucketName,
+                fileName,
+                imageFile.ContentType,
+                stream
             );
 
-            // Return your app's URL instead of direct GCS URL
             var fileNameOnly = fileName.StartsWith("images/") ? fileName.Substring(7) : fileName;
             return $"/api/ingestion/image/{fileNameOnly}";
         }
 
         public async Task<Stream> DownloadImageAsync(string fileName)
         {
-            try
-            {
-                // Ensure the file is in the images folder
-                var objectName = fileName.StartsWith("images/") ? fileName : $"images/{fileName}";
-                
-                var memoryStream = new MemoryStream();
-                await _storageClient.DownloadObjectAsync(_bucketName, objectName, memoryStream);
-                memoryStream.Position = 0;
-                
-                return memoryStream;
-            }
-            catch (GoogleApiException ex) when (ex.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                throw new FileNotFoundException($"Image {fileName} not found in bucket");
-            }
+            var objectName = fileName.StartsWith("images/") ? fileName : $"images/{fileName}";
+            var memoryStream = new MemoryStream();
+            await _storageClient.DownloadObjectAsync(_bucketName, objectName, memoryStream);
+            memoryStream.Position = 0;
+            return memoryStream;
         }
     }
 }

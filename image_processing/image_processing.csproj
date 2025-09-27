@@ -10,6 +10,12 @@
         <PackageReference Include="Confluent.Kafka" Version="2.11.1" />
         <PackageReference Include="Google.Cloud.PubSub.V1" Version="3.27.0" />
         <PackageReference Include="Google.Cloud.Storage.V1" Version="4.13.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
     </ItemGroup>
 
 </Project>

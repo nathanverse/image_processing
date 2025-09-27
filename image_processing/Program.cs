@@ -1,12 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 // using ImageHash;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography;
-using System.Text.Json;
 using Confluent.Kafka;
 using Google.Api.Gax;
 using Google.Cloud.PubSub.V1;
+using image_processing.Data;
 using image_processing.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +41,9 @@ builder.Services.AddSingleton<PublisherClient>(provider =>
     };
     return clientBuilder.Build();
 });
-
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 var app = builder.Build();
 
 app.UseHttpsRedirection();
