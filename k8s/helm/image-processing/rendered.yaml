@@ -1,0 +1,66 @@
+---
+# Source: image-processing/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-processing-hello-world
+  namespace: demo
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80   # keep svc -> pod aligned
+    protocol: TCP
+  selector:
+    app: image-processing-hello-world
+---
+# Source: image-processing/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-processing-hello-world
+  namespace: demo
+spec:
+  replicas:  1 
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: image-processing-hello-world
+  template:
+    metadata:
+      labels:
+        app: image-processing-hello-world
+    spec:
+      affinity: 
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - image-processing-hello-world
+                topologyKey: kubernetes.io/hostname
+      
+      containers:
+      - image: nginxdemos/hello:plain-text
+        imagePullPolicy: IfNotPresent
+        name: image-processing-hello-world
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            cpu: 50m
+            memory: 500Mi
+      imagePullSecrets:
+      - name: regcred

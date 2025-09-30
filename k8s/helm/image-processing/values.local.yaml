@@ -1,0 +1,14 @@
+env: local
+apps:
+  hello-world:
+    image: nginxdemos/hello:plain-text   # simple HTTP "hello" image
+    port: 80
+    replicaCount: 1
+    configmap: false
+    license: false
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 10

@@ -1,0 +1,16 @@
+{{- range $key,$val := .Values.apps}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $.Release.Name }}-{{ $key }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  ports:
+  - name: http
+    port: {{ $val.port }}
+    targetPort: {{ $val.port }}   # keep svc -> pod aligned
+    protocol: TCP
+  selector:
+    app: {{ $.Release.Name }}-{{ $key }}
+---
+{{- end }}

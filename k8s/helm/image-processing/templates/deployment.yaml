@@ -1,0 +1,82 @@
+{{- range $key,$val := .Values.apps }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $.Release.Name }}-{{ $key }}
+  namespace: {{  $.Release.Namespace }}
+spec:
+  replicas:  {{ ternary $val.replicaCount 1 (hasKey $val "replicaCount") }} 
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: {{ $.Release.Name }}-{{ $key }}
+  template:
+    metadata:
+      labels:
+        app: {{ $.Release.Name }}-{{ $key }}
+    spec:
+      affinity: 
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - {{ $.Release.Name }}-{{ $key }}
+                topologyKey: kubernetes.io/hostname
+
+      {{- if $val.license }}
+      volumes:
+      - name: license
+        secret:
+          secretName: license
+          items:
+          - key: License.lic
+            path: License.lic
+      {{- end }}
+      {{ if eq $.Values.env "qa" }}
+      tolerations:
+      - key: project
+        operator: "Equal"
+        value: app
+        effect: "NoSchedule"
+      {{ end }}
+      containers:
+      - image: {{ $val.image }}
+        imagePullPolicy: IfNotPresent
+        name: {{ $.Release.Name }}-{{ $key }}
+        ports:
+        - name: http
+          containerPort: {{ $val.port }}
+          protocol: TCP
+        {{- if $val.configmap }}
+        envFrom:
+        - configMapRef:
+            name: {{ $key }}
+        {{- end }}
+        {{- if $val.license  }}
+        volumeMounts:
+        - name: license
+          mountPath: /app/config
+          readOnly: true
+        {{- end }}
+        {{- with $val.livenessProbe }}
+        livenessProbe:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        resources:
+          requests:
+            cpu: 50m
+            memory: 500Mi
+      {{- if $val.imagePullSecrets }}
+      imagePullSecrets:
+        - name: {{ $val.imagePullSecrets }}
+      {{- end }}
+      {{- if eq $.Values.env "uat" }}
+      - name: ai-research-image-pull-secret
+      {{- end }}
+---      
+{{- end }}
