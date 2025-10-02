@@ -8,21 +8,15 @@ helm template image-processing . -f values.local.yaml -n demo > rendered.yaml
 
 # Install into namespace "demo" (create it if missing)
 
-helm install image-processing . \
- -f values.local.yaml \
- -n demo --create-namespace
+helm install image-processing . -f values.local.yaml -n demo --create-namespace
 
 # Normal upgrade
 
-helm upgrade image-processing . \
- -f values.local.yaml \
- -n demo
+helm upgrade image-processing . -f values.local.yaml -n demo
 
 # Force recreation (if patching fails due to merge errors)
 
-helm upgrade image-processing . \
- -f values.local.yaml \
- -n demo --force
+helm upgrade image-processing . -f values.local.yaml -n demo --force
 
 # Uninstall
 
@@ -30,9 +24,7 @@ helm uninstall image-processing -n demo
 
 # Debug Check what’s wrong with templates:
 
-helm upgrade image-processing . \
- -f values.local.yaml \
- -n demo --debug --dry-run
+helm upgrade image-processing . -f values.local.yaml -n demo --debug --dry-run
 
 # Kubernetes Service Access:
 

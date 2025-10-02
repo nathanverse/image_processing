@@ -3,7 +3,7 @@ apps:
   hello-world:
     image: nginxdemos/hello:plain-text   # simple HTTP "hello" image
     port: 80
-    replicaCount: 1
+    replicaCount: 3
     configmap: false
     license: false
     livenessProbe:
