@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using image_processing.Data;
-using image_processing.Models;
+using image_processing.Data.Models;
 
 namespace image_processing.Controllers;
 
@@ -8,9 +8,9 @@ namespace image_processing.Controllers;
 [Route("api/task")]
 public class TaskController : ControllerBase
 {
-    private readonly AppDbContext _dbContext;
+    private readonly IngestionDBcontext _dbContext;
 
-    public TaskController(AppDbContext dbContext)
+    public TaskController(IngestionDBcontext dbContext)
     {
         _dbContext = dbContext;
     }

@@ -9,7 +9,7 @@ using image_processing.Data;
 
 namespace image_processing.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(IngestionDBcontext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

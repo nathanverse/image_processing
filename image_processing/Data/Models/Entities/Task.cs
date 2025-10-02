@@ -1,4 +1,4 @@
-﻿namespace image_processing.Models;
+﻿namespace image_processing.Data.Models.Entities;
 
 public class TaskModel
 {

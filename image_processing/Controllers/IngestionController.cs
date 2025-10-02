@@ -1,27 +1,33 @@
-﻿using Google.Cloud.PubSub.V1;
-using Google.Protobuf;
+﻿using image_processing.Data;
+using image_processing.Data.Models.Entities;
 using image_processing.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using PubnubApi;
 using System.Security.Cryptography;
-using image_processing.Data;
-using image_processing.Models;
+using System.Text.Json;
 
-namespace image_processing;
+namespace image_processing.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class IngestionController : ControllerBase
 {
-    private readonly PublisherClient _publisherClient;
+    private readonly Pubnub _pubnub;
     private readonly IStorageService _storageService;
-    private readonly AppDbContext _dbContext; 
+    private readonly IngestionDBcontext _dbContext;
+    private readonly IConfiguration _configuration; // Để lấy channel
 
-    public IngestionController(PublisherClient publisherClient, IStorageService storageService, AppDbContext dbContext)
+    public IngestionController(
+        Pubnub pubnub,
+        IStorageService storageService,
+        IngestionDBcontext dbContext,
+        IConfiguration configuration)
     {
-        _publisherClient = publisherClient;
+        _pubnub = pubnub;
         _storageService = storageService;
         _dbContext = dbContext;
+        _configuration = configuration;
     }
 
     [HttpPost("upload-image")]
@@ -39,26 +45,35 @@ public class IngestionController : ControllerBase
             {
                 var hashBytes = await sha256.ComputeHashAsync(stream);
                 hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
-                stream.Position = 0;  
+                stream.Position = 0;
             }
 
             var extension = Path.GetExtension(imageFile.FileName);
-            var objectName = $"deduped/{hash}{extension}"; 
+            var objectName = $"deduped/{hash}{extension}";
 
-          
-            bool exists = await _storageService.ObjectExistsAsync(objectName);
             string imageUrl;
-            if (!exists)
+            if (!await _storageService.ObjectExistsAsync(objectName))
             {
                 using var uploadStream = imageFile.OpenReadStream();
                 imageUrl = await _storageService.UploadImageAsync(imageFile, objectName);
             }
             else
             {
-                imageUrl = $"/api/ingestion/image/{hash}{extension}";
+                // Không build thủ công → lấy URL từ storage service
+                imageUrl = await _storageService.GetImageUrlAsync(objectName);
             }
 
-            // Lưu task vào DB
+            var existingTask = await _dbContext.Tasks.FirstOrDefaultAsync(t => t.OriginUrl == imageUrl);
+            if (existingTask != null)
+            {
+                return Ok(new
+                {
+                    Message = "Image already processed.",
+                    TaskId = existingTask.Id,
+                    ImageUrl = imageUrl
+                });
+            }
+
             var task = new TaskModel
             {
                 Id = Guid.NewGuid(),
@@ -68,6 +83,7 @@ public class IngestionController : ControllerBase
             };
             _dbContext.Tasks.Add(task);
             await _dbContext.SaveChangesAsync();
+
             var messagePayload = new
             {
                 TaskId = task.Id.ToString(),
@@ -77,31 +93,40 @@ public class IngestionController : ControllerBase
             };
 
             var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
-            var message = new PubsubMessage { Data = ByteString.CopyFromUtf8(JsonSerializer.Serialize(messagePayload, options)) };
-            await _publisherClient.PublishAsync(message);
+            var serializedMessage = JsonSerializer.Serialize(messagePayload, options);
 
-            return Ok(new { Message = "Image uploaded (or deduped) and processing task sent.", TaskId = task.Id, ImageUrl = imageUrl });
+            var publishResult = await _pubnub.Publish()
+                .Channel(_configuration["PubNub:Channel"] ?? "image-processing-channel")
+                .Message(serializedMessage)
+                .ExecuteAsync();
+
+            if (publishResult.Result == null || publishResult.Status.Error)
+                throw new Exception("Failed to publish message to PubNub");
+
+            return Ok(new
+            {
+                Message = "Image uploaded (or deduped) and processing task sent.",
+                TaskId = task.Id,
+                ImageUrl = imageUrl
+            });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new { Message = "Error processing image upload", Error = ex.Message });
+            return StatusCode(500, new
+            {
+                Message = "Error processing image upload",
+                Error = ex.Message
+            });
         }
     }
-    
 
     [HttpGet("image/{fileName}")]
     public async Task<IActionResult> GetImage(string fileName)
     {
         try
         {
-            // Add authorization check here later
-            // if (!User.Identity.IsAuthenticated) return Unauthorized();
-            
             var imageStream = await _storageService.DownloadImageAsync(fileName);
-            
-            // Determine content type based on file extension
             var contentType = GetContentType(fileName);
-            
             return File(imageStream, contentType);
         }
         catch (FileNotFoundException ex)

@@ -1,16 +1,15 @@
-﻿using Google.Api;
-using image_processing.Models;
+﻿using image_processing.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
 namespace image_processing.Data;
 
-public class AppDbContext : DbContext
+public class IngestionDBcontext : DbContext
 {
-    public DbSet<TaskModel> Tasks { get; set; } = null!;
+    public DbSet<TaskModel> Tasks { get; set; } = null!; 
 
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public IngestionDBcontext(DbContextOptions<IngestionDBcontext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

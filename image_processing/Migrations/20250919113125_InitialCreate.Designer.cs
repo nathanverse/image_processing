@@ -10,7 +10,7 @@ using image_processing.Data;
 
 namespace image_processing.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(IngestionDBcontext))]
     [Migration("20250919113125_InitialCreate")]
     partial class InitialCreate
     {
